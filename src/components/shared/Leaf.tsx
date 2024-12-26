@@ -11,7 +11,7 @@ export default function Leaf({ position, className = '' }: LeafProps) {
       className={`absolute z-20 ${position === 'left' ? 'left-0' : 'right-0'} ${className}`}
     >
       <img
-        src="https://raw.githubusercontent.com/vuyelwadr/donna/refs/heads/main/files/leafTransparent.png"
+        src="/leafTransparent.png"
         alt=""
         className={`w-64 h-auto ${position === 'right' ? 'transform scale-x-[-1]' : ''}`}
       />

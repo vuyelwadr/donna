@@ -15,7 +15,7 @@ export default function Logo({ size = 'md', className = '' }: LogoProps) {
   return (
     <div className={`${sizes[size]} ${className}`}>
       <img 
-        src="https://raw.githubusercontent.com/vuyelwadr/donna/refs/heads/main/files/loggo.png"
+        src="/loggo.png"
         alt="Soothing Oasis"
         className="w-full h-full object-contain"
       />

@@ -6,7 +6,7 @@ export default function MainBackground() {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
         style={{
-          backgroundImage: 'url(https://raw.githubusercontent.com/vuyelwadr/donna/refs/heads/main/files/background1.png)',
+          backgroundImage: 'url(/darkBackgroundTransparent.png)',
           backgroundBlendMode: 'soft-light'
         }}
       />

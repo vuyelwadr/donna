@@ -13,7 +13,7 @@ export default function Hero() {
         <div 
           className="w-full h-full bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: 'url(https://raw.githubusercontent.com/vuyelwadr/donna/refs/heads/main/files/mainHeading.png)'
+            backgroundImage: 'url(/mainHeading.png)'
           }}
         />
         <div className="absolute inset-0 bg-black/25"></div>
