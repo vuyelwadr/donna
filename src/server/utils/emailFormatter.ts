@@ -1,4 +1,4 @@
-import { FormData } from '../../types/booking';
+import type { FormData } from '../types/booking.js';
 
 export function formatEmailContent(data: FormData) {
   const subject = `New Booking Request - ${data.service}`;

@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
-import { emailConfig, emailAddresses } from '../config/email';
-import { FormData } from '../../types/booking';
-import { formatEmailContent } from '../utils/emailFormatter';
+import { emailConfig, emailAddresses } from '../config/email.js';
+import type { FormData } from '../types/booking.js';
+import { formatEmailContent } from '../utils/emailFormatter.js';
 
 export class EmailService {
   private transporter: nodemailer.Transporter;

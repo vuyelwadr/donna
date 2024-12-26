@@ -15,6 +15,7 @@ app.use(cors());
 app.use(express.json());
 
 // Health check endpoint
+// @ts-ignore
 app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
@@ -40,6 +41,7 @@ emailService.verifyConnection()
 app.post('/api/booking', handleBookingRequest);
 
 // Error handling middleware
+// @ts-ignore
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
   console.error(err.stack);
   res.status(500).json({

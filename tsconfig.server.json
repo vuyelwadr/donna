@@ -1,14 +1,19 @@
 {
     "compilerOptions": {
-      "module": "CommonJS",               // For Node.js compatibility
-      "target": "ES2020",                 // Compatible with modern Node.js
-      "moduleResolution": "node",         // Node.js resolution
-      "outDir": "./dist/server",          // Output compiled files to `dist/server`
-      "rootDir": "./src/server",          // Specify server source directory
-      "esModuleInterop": true,            // Interoperability with CommonJS
-      "strict": true                      // Enforce strict type checking
+      "module": "ESNext",
+      "target": "ES2020",
+      "moduleResolution": "node",
+      "outDir": "./dist/server",
+      "rootDir": "./src/server",
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "resolveJsonModule": true,
+      "allowSyntheticDefaultImports": true,
+      "verbatimModuleSyntax": true,
+      "typeRoots": ["./node_modules/@types"]
     },
-    "include": ["src/server/**/*"],        // Include server files
-    "exclude": ["node_modules", "dist"]    // Exclude unnecessary files
+    "include": ["src/server/**/*"],
+    "exclude": ["node_modules", "dist", "src/frontend/**/*"]
   }
   

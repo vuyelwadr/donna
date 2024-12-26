@@ -1,6 +1,6 @@
-import { Request, Response } from 'express';
-import { EmailService } from '../services/emailService';
-import { FormData } from '../../types/booking';
+import type { Request, Response } from 'express';
+import { EmailService } from '../services/emailService.js';
+import type { FormData } from '../types/booking.js';
 
 export async function handleBookingRequest(req: Request, res: Response) {
   try {
