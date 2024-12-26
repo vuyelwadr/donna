@@ -4,14 +4,18 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        cormorant: ['Cormorant Garamond', 'serif'],
-        opensans: ['Open Sans', 'sans-serif'],
+        'alex-brush': ['Alex Brush', 'cursive'],
+        'cormorant': ['Cormorant Garamond', 'serif'],
+        'roca': ['Roca One', 'Open Sans', 'sans-serif'],
       },
       colors: {
-        primary: '#7C9082',
-        secondary: '#A5C4C7',
-        accent: '#E6D5B8',
-        charcoal: '#333333',
+        brand: {
+          primary: '#8B2635',
+          secondary: '#e8d3c8',
+          accent: '#D4AF37',
+          dark: '#2C1810',
+          light: '#FAF3F0',
+        },
       },
     },
   },

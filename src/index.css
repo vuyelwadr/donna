@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,27 +6,32 @@
 
 @layer base {
   html {
-    font-family: 'Open Sans', sans-serif;
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
     font-family: 'Cormorant Garamond', serif;
   }
+  
+  h1 {
+    font-family: 'Alex Brush', cursive;
+  }
+}
+
+@keyframes modalAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-modal {
+  animation: modalAppear 0.2s ease-out;
 }
 
 /* Smooth scroll behavior */
 html {
   scroll-behavior: smooth;
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-in;
 }
 
 /* Form validation styles */

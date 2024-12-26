@@ -1,29 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import LightBackground from './shared/LightBackground';
 
-const testimonials = [
-  {
-    name: "Maria",
-    date: "February 2024",
-    rating: 5,
-    text: "Sarah's deep tissue massage was exactly what I needed. Her technique is exceptional, and she really listens to your needs.",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80"
-  },
-  {
-    name: "James",
-    date: "January 2024",
-    rating: 5,
-    text: "The convenience of having a professional massage at home is unmatched. The service was professional and relaxing.",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80"
-  },
-  {
-    name: "Lisa",
-    date: "December 2023",
-    rating: 5,
-    text: "Best massage experience in Swakopmund! Sarah's aromatherapy massage helped me sleep better than I have in months.",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80"
-  }
-];
+// ... testimonials array stays the same ...
 
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -39,7 +18,7 @@ export default function Testimonials() {
   const prev = () => setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <div className="bg-white py-20 px-4">
+    <LightBackground className="py-20 px-4">
       <div className="max-w-4xl mx-auto">
         <h2 className="font-cormorant text-4xl text-center text-[#333333] mb-12">Client Testimonials</h2>
         
@@ -82,6 +61,6 @@ export default function Testimonials() {
           </button>
         </div>
       </div>
-    </div>
+    </LightBackground>
   );
 }

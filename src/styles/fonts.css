@@ -1,0 +1,15 @@
+/* Font imports */
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
+
+/* Font classes */
+.font-alex-brush {
+  font-family: 'Alex Brush', cursive;
+}
+
+.font-cormorant {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.font-roca {
+  font-family: 'Roca One', 'Open Sans', sans-serif;
+}

@@ -1,0 +1,37 @@
+/* Base background styles */
+.bg-pattern-light {
+  background-color: var(--brand-light);
+  position: relative;
+  isolation: isolate;
+}
+
+.bg-pattern-dark {
+  background-color: var(--brand-dark);
+  position: relative;
+  isolation: isolate;
+}
+
+/* Section transitions */
+.section-transition {
+  position: relative;
+}
+
+.section-transition::before,
+.section-transition::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50px;
+  pointer-events: none;
+}
+
+.section-transition::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--brand-light), transparent);
+}
+
+.section-transition::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--brand-light), transparent);
+}

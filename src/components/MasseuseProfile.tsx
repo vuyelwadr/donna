@@ -1,8 +1,9 @@
 import React from 'react';
+import LightBackground from './shared/LightBackground';
 
 export default function MasseuseProfile() {
   return (
-    <div className="bg-white py-20 px-4">
+    <LightBackground className="py-20 px-4">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
         <div className="flex-1 space-y-6">
           <h2 className="font-cormorant text-4xl text-[#333333]">Meet Your Therapist</h2>
@@ -31,6 +32,6 @@ export default function MasseuseProfile() {
           />
         </div>
       </div>
-    </div>
+    </LightBackground>
   );
 }
