@@ -1,0 +1,36 @@
+/* Smooth scrolling behavior */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--scroll-padding, 80px);
+  }
+  
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  /* Custom scrollbar styles for browsers that support it */
+  @media (min-width: 768px) {
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+  
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+  
+    ::-webkit-scrollbar-thumb {
+      background: rgba(139, 38, 53, 0.3);
+      border-radius: 4px;
+    }
+  
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(139, 38, 53, 0.5);
+    }
+  }
