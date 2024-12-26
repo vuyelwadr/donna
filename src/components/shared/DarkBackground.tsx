@@ -11,7 +11,7 @@ export default function DarkBackground({ children, className = '' }: Props) {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
         style={{
-          backgroundImage: 'url(https://raw.githubusercontent.com/vuyelwadr/donna/main/files/darkBackgroundTransparent.png)'
+          backgroundImage: 'url(/darkBackgroundTransparent.png)'
         }}
       />
       <div className="relative z-10">

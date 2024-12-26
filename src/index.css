@@ -7,11 +7,27 @@
 @layer base {
   html {
     font-family: 'Cormorant Garamond', serif;
+    @apply overflow-x-hidden;
+  }
+  
+  body {
+    @apply overflow-x-hidden min-h-screen;
   }
   
   h1 {
     font-family: 'Alex Brush', cursive;
   }
+}
+
+/* Ensure images don't cause overflow */
+img {
+  @apply max-w-full h-auto;
+}
+
+/* Container responsiveness */
+.container {
+  @apply w-full px-4 mx-auto;
+  max-width: min(100% - 2rem, var(--container-max, 1280px));
 }
 
 @keyframes modalAppear {

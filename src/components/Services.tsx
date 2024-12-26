@@ -6,14 +6,14 @@ import ServiceBookButton from './services/ServiceBookButton';
 
 export default function Services() {
   return (
-    <section id="services" className="relative pt-20">
-      <DarkBackground className="py-20 px-4">
+    <section id="services" className="relative">
+      <DarkBackground className="py-12 px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="font-heading text-4xl text-center text-white mb-12">Our Services</h2>
+          <h2 className="font-heading text-4xl text-center text-white mb-8">Our Services</h2>
           
           {services.map((category) => (
-            <div key={category.category} className="mb-16">
-              <h3 className="font-heading text-2xl text-brand-secondary mb-8 text-center">{category.category}</h3>
+            <div key={category.category} className="mb-12 last:mb-0">
+              <h3 className="font-heading text-2xl text-brand-secondary mb-6 text-center">{category.category}</h3>
               <div className="grid md:grid-cols-2 gap-8">
                 {category.items.map((service) => (
                   <div key={service.name} className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">

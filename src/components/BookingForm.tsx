@@ -46,16 +46,15 @@ export default function BookingForm() {
     setErrors(prev => ({ ...prev, [name]: error }));
   };
 
-  // Form is valid if there are no errors and at least one contact method is provided
   const hasValidEmail = formData.email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email);
   const hasValidPhone = formData.phone && /^\+?[\d\s-]+$/.test(formData.phone);
   const isValid = Object.keys(errors).length === 0 && (hasValidEmail || hasValidPhone);
 
   return (
-    <section id="booking" className="relative pt-20">
-      <DarkBackground className="py-20 px-4">
+    <section id="booking" className="relative">
+      <DarkBackground className="py-12 px-4">
         <div className="max-w-4xl mx-auto">
-          <h2 className="font-cormorant text-4xl text-center text-white mb-12">Book Your Session</h2>
+          <h2 className="font-cormorant text-4xl text-center text-white mb-8">Book Your Session</h2>
           
           <form className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg p-8">
             <div className="grid md:grid-cols-2 gap-6">
@@ -103,6 +102,7 @@ export default function BookingForm() {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 error={touchedFields.has('date') ? errors.date : undefined}
+                required
               />
               
               <FormField
@@ -113,6 +113,7 @@ export default function BookingForm() {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 error={touchedFields.has('time') ? errors.time : undefined}
+                required
               />
             </div>
             

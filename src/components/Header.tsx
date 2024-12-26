@@ -8,18 +8,18 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-brand-light py-6 px-4 fixed w-full z-50">
+    <header className="bg-brand-light py-4 sm:py-6 px-4 fixed w-full z-50">
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         <div 
-          className="flex items-center gap-4 cursor-pointer"
+          className="flex items-center gap-2 sm:gap-4 cursor-pointer"
           onClick={scrollToTop}
         >
-          <Logo size="md" />
+          <Logo size="sm" className="w-8 h-8 sm:w-12 sm:h-12" />
           <div>
-            <h1 className="font-alex-brush text-3xl text-brand-primary">
+            <h1 className="font-alex-brush text-2xl sm:text-3xl text-brand-primary">
               Soothing Oasis
             </h1>
-            <p className="font-cormorant text-sm text-brand-dark">
+            <p className="font-cormorant text-xs sm:text-sm text-brand-dark">
               Mobile Massage Therapist
             </p>
           </div>
