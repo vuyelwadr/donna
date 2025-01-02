@@ -4,14 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"vite\" \"npm run server\"",
-    "build": "vite build && npm run build:server",
-    "build:server": "tsc -p tsconfig.server.json --traceResolution",
+    "dev": "vite",
+    "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "server": "tsx src/server/index.ts",
-    "start:server": "node dist/server/index.js",
-    "production": "npm run build && node dist/server/index.js"
+    "preview": "vite preview"
   },
   "dependencies": {
     "cors": "^2.8.5",

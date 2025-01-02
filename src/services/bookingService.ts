@@ -6,9 +6,21 @@ interface BookingResponse {
   confirmationNumber?: string;
 }
 
+const parsedUrl = new URL(window.location.href);
+// 2. Extract only the protocol (http/https) and hostname (e.g., localhost)
+const { protocol, hostname } = parsedUrl;
+// 3. Build the base URL
+var baseUrl = `${protocol}//${hostname}`;
+if (hostname == "localhost"){
+  var port = '3000';
+  baseUrl = `${baseUrl}:${port}`;
+}
+
+const bookingUrl = `${baseUrl}/api/booking`;
+
 export async function submitBooking(formData: FormData): Promise<BookingResponse> {
   try {
-    const response = await fetch('/api/booking', {
+    const response = await fetch(bookingUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
