@@ -1,0 +1,16 @@
+/* Glass effect utilities */
+.glass-background {
+  @apply bg-white/80 backdrop-blur-sm;
+}
+
+.glass-shadow {
+  @apply shadow-[0_8px_32px_0_rgba(31,38,135,0.07)];
+}
+
+.glass-border {
+  @apply border border-white/20;
+}
+
+/* Ensure text remains readable */
+.glass-text {
+  @apply text-brand-dark [text-shadow:0_1px_1px_rgba(255,255,255,0.5)];

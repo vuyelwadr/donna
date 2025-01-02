@@ -3,20 +3,21 @@ import { Clock, DollarSign } from 'lucide-react';
 import DarkBackground from './shared/DarkBackground';
 import { services } from '../data/services';
 import ServiceBookButton from './services/ServiceBookButton';
+import GlassCard from './shared/GlassCard';
 
 export default function Services() {
   return (
     <section id="services" className="relative">
       <DarkBackground className="py-12 px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="font-heading text-4xl text-center text-white mb-8">Our Services</h2>
+          <h2 className="font-heading text-4xl text-center text-white mb-8">My Services</h2>
           
           {services.map((category) => (
             <div key={category.category} className="mb-12 last:mb-0">
               <h3 className="font-heading text-2xl text-brand-secondary mb-6 text-center">{category.category}</h3>
               <div className="grid md:grid-cols-2 gap-8">
                 {category.items.map((service) => (
-                  <div key={service.name} className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                  <GlassCard key={service.name} className="p-6">
                     <h4 className="font-heading text-xl text-brand-primary mb-4">{service.name}</h4>
                     
                     {service.durations.map((duration, index) => (
@@ -42,7 +43,7 @@ export default function Services() {
                       </ul>
                     </div>
                     <ServiceBookButton serviceName={service.name} />
-                  </div>
+                  </GlassCard>
                 ))}
               </div>
             </div>
