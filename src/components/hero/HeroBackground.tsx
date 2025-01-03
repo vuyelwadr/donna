@@ -2,9 +2,9 @@ import React from 'react';
 
 export default function HeroBackground() {
   return (
-    <div className="absolute inset-0">
+    <div className="absolute inset-0 overflow-hidden">
       <div 
-        className="w-[200%] h-[200%] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-cover bg-center bg-no-repeat"
+        className="w-full h-full absolute top-0 left-0 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: 'url(/mainHeading.png)'
         }}

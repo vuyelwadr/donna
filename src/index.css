@@ -7,15 +7,15 @@
 @layer base {
   html {
     font-family: 'Cormorant Garamond', serif;
-    @apply min-h-screen;
+    @apply min-h-screen overflow-x-hidden;
   }
   
   body {
-    @apply min-h-screen m-0;
+    @apply min-h-screen m-0 overflow-x-hidden;
   }
 
   #root {
-    @apply min-h-screen flex flex-col;
+    @apply min-h-screen flex flex-col overflow-x-hidden;
   }
   
   h1 {
@@ -25,13 +25,13 @@
 
 /* Ensure images don't cause overflow */
 img {
-  @apply max-w-full h-auto;
+  @apply max-w-full h-auto object-contain;
 }
 
 /* Container responsiveness */
 .container {
   @apply w-full px-4 mx-auto;
-  max-width: min(100% - 2rem, var(--container-max, 1280px));
+  max-width: min(100% - 1rem, var(--container-max, 1280px));
 }
 
 @keyframes modalAppear {
