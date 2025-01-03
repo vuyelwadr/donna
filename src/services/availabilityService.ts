@@ -1,7 +1,7 @@
 import { AvailabilityData } from '../types/availability';
 import availabilityData from '../data/availability.json';
 
-const API_URL = 'http://localhost:3000/api';
+const API_URL = import.meta.env.DEV ? 'http://localhost:3000/api' : '/api';
 
 export function loadAvailability(): AvailabilityData {
   return availabilityData;
