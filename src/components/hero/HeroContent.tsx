@@ -1,5 +1,6 @@
 import React from 'react';
 import { Calendar } from 'lucide-react';
+import ContentDisplay from '../ContentDisplay';
 
 interface Props {
   onBookingClick: () => void;
@@ -14,9 +15,10 @@ export default function HeroContent({ onBookingClick }: Props) {
       <p className="font-cormorant text-xl sm:text-2xl md:text-3xl mb-4 drop-shadow-md">
         Mobile Massage Therapist
       </p>
-      <p className="text-lg sm:text-xl mb-8 max-w-2xl drop-shadow-md">
-        Experience the ultimate relaxation with our premium in-home massage services
-      </p>
+      <ContentDisplay 
+        sectionId="hero"
+        className="text-lg sm:text-xl mb-8 max-w-2xl drop-shadow-md"
+      />
       <button
         onClick={onBookingClick}
         className="bg-brand-primary hover:bg-brand-primary/90 text-white px-6 sm:px-8 py-3 rounded-full flex items-center gap-2 transition-all shadow-lg hover:shadow-xl"

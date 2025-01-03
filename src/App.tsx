@@ -1,54 +1,45 @@
 import React from 'react';
-import Header from './components/Header';
-import Hero from './components/hero/Hero';
-import MasseuseProfile from './components/sections/MasseuseProfile';
-import Services from './components/Services';
-import Testimonials from './components/sections/testimonials/Testimonials';
-import BookingForm from './components/BookingForm';
-import ContactDetails from './components/sections/ContactDetails';
-import Footer from './components/Footer';
-import MainBackground from './components/MainBackground';
-import BackgroundDecoration from './components/BackgroundDecoration';
-import { BookingProvider } from './context/BookingContext';
-import { ToastProvider } from './context/ToastContext';
-import Toast from './components/shared/Toast';
-import { useToast } from './context/ToastContext';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ContentProvider } from './context/ContentContext';
+import MainLayout from './layouts/MainLayout';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/admin/LoginPage';
+import AdminLayout from './layouts/AdminLayout';
+import AdminDashboard from './pages/admin/DashboardPage';
+import ContentPage from './pages/admin/ContentPage';
+import AvailabilityPage from './pages/admin/AvailabilityPage';
+import ProtectedRoute from './components/admin/auth/ProtectedRoute';
 
-function AppContent() {
-  const { message, type, isVisible, hideToast } = useToast();
-  
+const queryClient = new QueryClient();
+
+export default function App() {
   return (
-    <div className="min-h-screen relative">
-      <MainBackground />
-      <div className="relative z-10">
-        <BackgroundDecoration />
-        <Header />
-        <Hero />
-        <MasseuseProfile />
-        <Services />
-        <Testimonials />
-        <BookingForm />
-        <ContactDetails />
-        <Footer />
-        <Toast
-          message={message}
-          type={type}
-          isVisible={isVisible}
-          onClose={hideToast}
-        />
-      </div>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <ContentProvider>
+        <BrowserRouter>
+          <Routes>
+            {/* Public routes */}
+            <Route path="/" element={<MainLayout />}>
+              <Route index element={<HomePage />} />
+            </Route>
+
+            {/* Admin routes */}
+            <Route path="/admin">
+              <Route path="login" element={<LoginPage />} />
+              <Route element={
+                <ProtectedRoute>
+                  <AdminLayout />
+                </ProtectedRoute>
+              }>
+                <Route index element={<AdminDashboard />} />
+                <Route path="content" element={<ContentPage />} />
+                <Route path="availability" element={<AvailabilityPage />} />
+              </Route>
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </ContentProvider>
+    </QueryClientProvider>
   );
 }
-
-function App() {
-  return (
-    <ToastProvider>
-      <BookingProvider>
-        <AppContent />
-      </BookingProvider>
-    </ToastProvider>
-  );
-}
-
-export default App;

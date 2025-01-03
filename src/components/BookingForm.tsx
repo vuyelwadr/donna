@@ -4,9 +4,12 @@ import ServiceSelect from './booking/ServiceSelect';
 import WhatsAppButton from './booking/WhatsAppButton';
 import BookingButton from './booking/BookingButton';
 import FormField from './booking/FormField';
+import DateSelect from './booking/DateSelect';
+import TimeSelect from './booking/TimeSelect';
 import { useBooking } from '../context/BookingContext';
 import { useFormValidation } from './booking/useFormValidation';
 import { FormData } from '../types/booking';
+import availabilityData from '../data/availability.json';
 
 const initialFormData: FormData = {
   name: '',
@@ -94,26 +97,21 @@ export default function BookingForm() {
                 onBlur={handleBlur}
               />
               
-              <FormField
-                label="Preferred Date"
-                name="date"
-                type="date"
+              <DateSelect
                 value={formData.date}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                schedule={availabilityData.schedule}
                 error={touchedFields.has('date') ? errors.date : undefined}
-                required
               />
               
-              <FormField
-                label="Preferred Time"
-                name="time"
-                type="time"
+              <TimeSelect
                 value={formData.time}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                date={formData.date}
+                schedule={availabilityData.schedule}
                 error={touchedFields.has('time') ? errors.time : undefined}
-                required
               />
             </div>
             

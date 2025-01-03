@@ -1,0 +1,74 @@
+{
+  "appointments": [
+    {
+      "id": "past-1",
+      "name": "Sarah Johnson",
+      "phone": "+264123456789",
+      "email": "sarah@example.com",
+      "service": "Swedish Massage",
+      "date": "2024-02-15",
+      "time": "14:00",
+      "requirements": "Medium pressure preferred",
+      "status": "completed",
+      "createdAt": "2024-02-14T10:00:00Z"
+    },
+    {
+      "id": "past-2",
+      "name": "Michael Brown",
+      "phone": "+264987654321",
+      "email": "michael@example.com",
+      "service": "Deep Tissue Massage",
+      "date": "2024-02-22",
+      "time": "10:00",
+      "status": "completed",
+      "createdAt": "2024-02-20T08:30:00Z"
+    },
+    {
+      "id": "future-1",
+      "name": "Emma Wilson",
+      "phone": "+264456789123",
+      "email": "emma@example.com",
+      "service": "Aromatherapy Massage",
+      "date": "2025-03-15",
+      "time": "15:00",
+      "requirements": "Lavender oil preferred",
+      "status": "confirmed",
+      "createdAt": "2024-03-01T09:15:00Z"
+    },
+    {
+      "id": "future-2",
+      "name": "James Davis",
+      "phone": "+264789123456",
+      "email": "james@example.com",
+      "service": "Back & Neck Massage",
+      "date": "2024-03-22",
+      "time": "11:00",
+      "status": "pending",
+      "createdAt": "2024-03-05T14:20:00Z"
+    },
+    {
+      "name": "Vuyelwa David Ruwodo",
+      "phone": "0414702507",
+      "email": "vuyelwadr@gmail.com",
+      "service": "Deep Tissue Massage",
+      "date": "2025-01-17",
+      "time": "11:00",
+      "requirements": "yyy",
+      "id": "f412f5df-28e6-489a-a0ce-bfd3a4363f0d",
+      "status": "pending",
+      "createdAt": "2025-01-03T16:20:13.714Z"
+    },
+    {
+      "name": "Vuyelwa David Ruwodo",
+      "phone": "0414702507",
+      "email": "vuyelwadr@gmail.com",
+      "service": "Deep Tissue Massage",
+      "date": "2025-01-14",
+      "time": "10:00",
+      "requirements": "hhh",
+      "id": "361b9ff3-4146-4e2b-9d9f-13cc2d1d0739",
+      "status": "pending",
+      "createdAt": "2025-01-03T16:20:43.762Z"
+    }
+  ]
+}

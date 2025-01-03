@@ -1,6 +1,7 @@
 import React from 'react';
 import Logo from './Logo';
 import { scrollToSection } from '../utils/scroll';
+import { Lock } from 'lucide-react';
 
 export default function Header() {
   const scrollToTop = () => {
@@ -25,7 +26,7 @@ export default function Header() {
           </div>
         </div>
         <nav className="hidden md:block">
-          <ul className="flex gap-8 font-cormorant text-lg text-brand-dark">
+          <ul className="flex gap-8 font-cormorant text-lg text-brand-dark items-center">
             <li>
               <button 
                 onClick={() => scrollToSection('services')}
@@ -49,6 +50,15 @@ export default function Header() {
               >
                 Contact
               </button>
+            </li>
+            <li>
+              <a 
+                href="/admin/login"
+                className="flex items-center gap-2 text-brand-primary hover:text-brand-primary/80 transition-colors"
+              >
+                <Lock className="w-4 h-4" />
+                <span>Admin</span>
+              </a>
             </li>
           </ul>
         </nav>

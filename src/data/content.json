@@ -1,0 +1,40 @@
+{
+  "sections": [
+    {
+      "id": "hero",
+      "name": "Hero Section",
+      "content": {
+        "type": "doc",
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Experience the ultimate relaxation with our premium in-home massage services"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "operatingHours",
+      "name": "Operating Hours",
+      "content": {
+        "type": "doc",
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Operating Hours: Monday - Saturday, 8:00 AM - 8:00 PM"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
