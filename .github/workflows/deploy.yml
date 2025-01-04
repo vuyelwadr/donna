@@ -33,7 +33,6 @@ jobs:
         host: vuyelwa.com
         port: 21098
         username: vuyerbho
-        password: ${{ secrets.SSH_PASSPHRASE }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         script: |
@@ -47,7 +46,6 @@ jobs:
         host: vuyelwa.com
         port: 21098
         username: vuyerbho
-        password: ${{ secrets.SSH_PASSPHRASE }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         source: dist/*
