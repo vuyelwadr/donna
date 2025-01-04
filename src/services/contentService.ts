@@ -1,11 +1,8 @@
 import { ContentSection } from '../types/content';
 import contentData from '../data/content.json';
+import { API_URL } from '../utils/apiUrl';
 
-// Get base URL dynamically based on environment
-const getApiUrl = () => {
-  const isDev = import.meta.env.DEV;
-  return isDev ? 'http://localhost:3000/api' : '/api';
-};
+
 
 export function loadContent(): ContentSection[] {
   return contentData.sections;
@@ -13,7 +10,7 @@ export function loadContent(): ContentSection[] {
 
 export async function saveContent(sections: ContentSection[]): Promise<void> {
   try {
-    const response = await fetch(`${getApiUrl()}/content`, {
+    const response = await fetch(`${API_URL}/content`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

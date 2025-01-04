@@ -2,8 +2,8 @@ import { FormData } from '../types/booking';
 import { Appointment } from '../types/appointment';
 import { parseISO, isAfter } from 'date-fns';
 import { BookingResponse } from '../types/bookingResponse';
+import { API_URL } from '../utils/apiUrl';
 
-const API_URL = import.meta.env.DEV ? 'http://localhost:3000/api' : '/api';
 
 export async function saveAppointment(formData: FormData): Promise<Appointment> {
   const response = await fetch(`${API_URL}/appointments`, {
