@@ -14,8 +14,7 @@ export function generateHourlySlots(timeSlots: TimeSlot[], appointments: FormDat
   const hourlySlots: HourlySlot[] = [];
   const matchingAppointment = appointments.find(appointment => appointment.date === date);
 
-  let existingAppointmentForDate = !!matchingAppointment; // true if a matching appointment exists
-  let existingAppointmentTime = matchingAppointment?.time || ''; // Time of the found appointment, or an empty string
+  let existingAppointmentTime = matchingAppointment?.time || '';
 
   timeSlots.forEach(slot => {
     let currentTime = parse(slot.start, 'HH:mm', new Date());
@@ -24,7 +23,7 @@ export function generateHourlySlots(timeSlots: TimeSlot[], appointments: FormDat
     while (currentTime < endTime) {
       const slotStart = format(currentTime, 'HH:mm');
       const slotEnd = format(addHours(currentTime, 1), 'HH:mm');
-      if (existingAppointmentForDate && existingAppointmentTime != slotStart){
+      if (existingAppointmentTime != slotStart){
         hourlySlots.push({
           start: slotStart,
           end: slotEnd,
