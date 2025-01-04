@@ -26,17 +26,29 @@ jobs:
         npm install
         npm run build
 
-    # Deploy to cPanel
-    - name: Deploy to cPanel server
+    # Clean remote server directory
+    - name: Clean remote server directory
       uses: appleboy/ssh-action@v1.2.0
       with:
-        host: vuyelwa.com # Replace with your cPanel host
+        host: vuyelwa.com
         port: 21098
-        username: vuyerbho # Replace with your cPanel username
+        username: vuyerbho
         password: ${{ secrets.SSH_PASSPHRASE }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         script: |
-          cd donna.vuyelwa.com
+          cd /home/vuyerbho/donna.vuyelwa.com
           find . -mindepth 1 -not -name '.htaccess' -not -path './server/*' -not -name 'server' -exec rm -rf {} +
-          cp -r ~/donna/dist/* ./
+
+    # Upload build files to the server
+    - name: Upload build files to the server
+      uses: appleboy/scp-action@v0.1.7
+      with:
+        host: vuyelwa.com
+        port: 21098
+        username: vuyerbho
+        password: ${{ secrets.SSH_PASSPHRASE }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        passphrase: ${{ secrets.SSH_PASSPHRASE }}
+        source: dist/*
+        target: /home/vuyerbho/donna.vuyelwa.com/
