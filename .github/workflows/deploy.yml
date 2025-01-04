@@ -52,3 +52,4 @@ jobs:
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         source: dist/*
         target: /home/vuyerbho/donna.vuyelwa.com/
+        strip_components: 1
