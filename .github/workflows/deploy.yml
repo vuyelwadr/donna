@@ -33,6 +33,7 @@ jobs:
         host: vuyelwa.com # Replace with your cPanel host
         username: vuyerbho # Replace with your cPanel username
         key: ${{ secrets.SSH_PRIVATE_KEY }}
+        passphrase: ${{ secrets.SSH_PASSPHRASE }}
         script: |
           cd donna.vuyelwa.com
           find . -mindepth 1 -not -name '.htaccess' -not -path './server/*' -not -name 'server' -exec rm -rf {} +
