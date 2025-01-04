@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
     # Checkout the code
@@ -28,7 +28,7 @@ jobs:
 
     # Deploy to cPanel
     - name: Deploy to cPanel server
-      uses: appleboy/ssh-action@v0.1.11
+      uses: appleboy/ssh-action@v1.2.0
       with:
         host: your-cpanel-host.com # Replace with your cPanel host
         username: your-cpanel-username # Replace with your cPanel username
