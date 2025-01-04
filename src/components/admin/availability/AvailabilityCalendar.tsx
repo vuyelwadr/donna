@@ -3,28 +3,51 @@ import { Save } from 'lucide-react';
 import DaySchedule from './DaySchedule';
 import { loadAvailability, saveAvailability } from '../../../services/availabilityService';
 import type { DayAvailability, AvailabilityData } from '../../../types/availability';
+import { useToast } from '../../../context/ToastContext';
+
 
 export default function AvailabilityCalendar() {
   const [schedule, setSchedule] = useState<DayAvailability[]>([]);
   const [isSaving, setIsSaving] = useState(false);
+  const { showToast } = useToast();
+  
 
   useEffect(() => {
-    const data = loadAvailability();
-    setSchedule(data.schedule);
+    const fetchAvailability = async () => {
+      try {
+        const data: AvailabilityData = await loadAvailability();
+        setSchedule(data.schedule);
+      } catch (error) {
+        console.error('Failed to load availability:', error);
+        // Optionally handle the error, e.g., set an error state or notify the user
+      }
+    };
+
+    fetchAvailability();
   }, []);
 
   const handleDayUpdate = (dayIndex: number, updatedDay: DayAvailability) => {
-    setSchedule(prev => prev.map((day, i) => 
-      i === dayIndex ? updatedDay : day
-    ));
+    setSchedule((prev) =>
+      prev.map((day, i) => (i === dayIndex ? updatedDay : day))
+    );
   };
 
   const handleSave = async () => {
     setIsSaving(true);
     try {
       await saveAvailability({ schedule });
+  
+          showToast(
+            'Your Availability schedule has been updated.',
+            'success'
+          );
     } catch (error) {
       console.error('Failed to save availability:', error);
+      showToast(
+        'Your Availability schedule saving failed. Try again.',
+        'error'
+      );
+      // Optionally handle the error, e.g., revert the update or notify the user
     } finally {
       setIsSaving(false);
     }

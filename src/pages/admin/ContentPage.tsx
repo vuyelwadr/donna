@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import { Save } from 'lucide-react';
 import ContentEditor from '../../components/admin/content/ContentEditor';
 import { useContent } from '../../context/ContentContext';
+import Toast from '../../components/shared/Toast';
+import { useToast } from '../../context/ToastContext';
 
 export default function ContentPage() {
+  const { message, type, isVisible, hideToast } = useToast();
+
   const { sections, updateContent } = useContent();
   const [pendingChanges, setPendingChanges] = useState<Record<string, any>>({});
   const [isSaving, setIsSaving] = useState(false);
@@ -35,8 +39,8 @@ export default function ContentPage() {
           disabled={!hasChanges || isSaving}
           className={`
             flex items-center gap-2 px-4 py-2 rounded-md text-white
-            ${hasChanges 
-              ? 'bg-brand-primary hover:bg-brand-primary/90' 
+            ${hasChanges
+              ? 'bg-brand-primary hover:bg-brand-primary/90'
               : 'bg-gray-300 cursor-not-allowed'
             }
             transition-colors
@@ -58,6 +62,12 @@ export default function ContentPage() {
           </div>
         ))}
       </div>
+      <Toast
+        message={message}
+        type={type}
+        isVisible={isVisible}
+        onClose={hideToast}
+      />
     </div>
   );
 }

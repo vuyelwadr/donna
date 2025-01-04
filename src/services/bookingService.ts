@@ -11,6 +11,10 @@ export async function submitBooking(formData: FormData): Promise<BookingResponse
     if (!appointment || !appointmentEmail.success) {
       throw new Error('Failed to create appointment');
     }
+
+    if (!appointmentEmail.success) {
+      throw new Error('Failed to send appointment email');
+    }
     
     return {
       success: true,

@@ -37,7 +37,7 @@ jobs:
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         script: |
           cd /home/vuyerbho/donna.vuyelwa.com
-          find . -mindepth 1 -not -name '.htaccess' -not -path './server/*' -not -name 'server' -exec rm -rf {} +
+          find . -mindepth 1 -not -name '.htaccess' -not -path './server/*' -not -path './data/*' -not -name 'server' -not -name 'data' -exec rm -rf {} +
 
     # Upload build files to the server
     - name: Upload build files to the server
