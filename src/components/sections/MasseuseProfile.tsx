@@ -39,7 +39,7 @@ export default function MasseuseProfile() {
             <GlassPanel>
               <GlassCard interactive={false}>
                 <img
-                  src="https://github.com/vuyelwadr/donna/blob/aca51a88bf7dd0adc1c13c6c3c0ee4f47638b7f5/public/donnaOG.png?raw=true"
+                  src="/donnaOG.png"
                   alt="Donna Naruses"
                   className="w-full h-auto md:h-[500px] object-contain rounded-lg"
                 />
