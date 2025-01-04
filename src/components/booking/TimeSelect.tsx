@@ -1,6 +1,7 @@
 import React from 'react';
 import { Clock } from 'lucide-react';
 import { DayAvailability } from '../../types/availability';
+import { FormData } from '../../types/booking';
 import { getAvailableTimeSlots } from '../../utils/availability';
 import { generateHourlySlots } from '../../utils/timeSlots';
 
@@ -10,12 +11,13 @@ interface Props {
   onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
   date: string;
   schedule: DayAvailability[];
+  appointments: FormData[];
   error?: string;
 }
 
-export default function TimeSelect({ value, onChange, onBlur, date, schedule, error }: Props) {
+export default function TimeSelect({ value, onChange, onBlur, date, schedule, appointments, error }: Props) {
   const timeSlots = date 
-    ? generateHourlySlots(getAvailableTimeSlots(schedule, date))
+    ? generateHourlySlots(getAvailableTimeSlots(schedule, date), appointments, date)
     : [];
 
   const handleTimeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

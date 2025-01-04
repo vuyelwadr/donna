@@ -10,6 +10,7 @@ import { useBooking } from '../context/BookingContext';
 import { useFormValidation } from './booking/useFormValidation';
 import { FormData } from '../types/booking';
 import availabilityData from '../data/availability.json';
+import appointmentData from '../data/appointments.json';
 
 const initialFormData: FormData = {
   name: '',
@@ -111,6 +112,7 @@ export default function BookingForm() {
                 onBlur={handleBlur}
                 date={formData.date}
                 schedule={availabilityData.schedule}
+                appointments={appointmentData.appointments}
                 error={touchedFields.has('time') ? errors.time : undefined}
               />
             </div>
