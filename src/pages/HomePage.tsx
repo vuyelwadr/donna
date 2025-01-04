@@ -8,7 +8,6 @@ import BookingForm from '../components/BookingForm';
 import ContactDetails from '../components/sections/ContactDetails';
 import Footer from '../components/Footer';
 import MainBackground from '../components/MainBackground';
-import BackgroundDecoration from '../components/BackgroundDecoration';
 import Toast from '../components/shared/Toast';
 import { useToast } from '../context/ToastContext';
 
@@ -19,7 +18,6 @@ export default function HomePage() {
     <div className="min-h-screen relative">
       <MainBackground />
       <div className="relative z-10">
-        <BackgroundDecoration />
         <Header />
         <Hero />
         <MasseuseProfile />
