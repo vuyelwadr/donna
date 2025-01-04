@@ -31,7 +31,9 @@ jobs:
       uses: appleboy/ssh-action@v1.2.0
       with:
         host: vuyelwa.com # Replace with your cPanel host
+        port: 21098
         username: vuyerbho # Replace with your cPanel username
+        password: ${{ secrets.SSH_PASSPHRASE }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         script: |
