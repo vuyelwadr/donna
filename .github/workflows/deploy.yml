@@ -1,0 +1,39 @@
+name: Deploy to cPanel
+
+on:
+  push:
+    branches:
+      - main # Change this to your desired branch if necessary
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout the code
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Set up Node.js
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '22' # Use the Node.js version your project requires
+
+    # Install dependencies and build the app
+    - name: Install dependencies and build
+      run: |
+        npm install
+        npm run build
+
+    # Deploy to cPanel
+    - name: Deploy to cPanel server
+      uses: appleboy/ssh-action@v0.1.11
+      with:
+        host: your-cpanel-host.com # Replace with your cPanel host
+        username: your-cpanel-username # Replace with your cPanel username
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          cd donna.vuyelwa.com
+          find . -mindepth 1 -not -name '.htaccess' -not -path './server/*' -not -name 'server' -exec rm -rf {} +
+          cp -r ~/donna/dist/* ./
