@@ -3,13 +3,11 @@ import { Save } from 'lucide-react';
 import DaySchedule from './DaySchedule';
 import { loadAvailability, saveAvailability } from '../../../services/availabilityService';
 import type { DayAvailability, AvailabilityData } from '../../../types/availability';
-import { useToast } from '../../../context/ToastContext';
 
 
 export default function AvailabilityCalendar() {
   const [schedule, setSchedule] = useState<DayAvailability[]>([]);
   const [isSaving, setIsSaving] = useState(false);
-  const { showToast } = useToast();
   
 
   useEffect(() => {
@@ -36,17 +34,8 @@ export default function AvailabilityCalendar() {
     setIsSaving(true);
     try {
       await saveAvailability({ schedule });
-  
-          showToast(
-            'Your Availability schedule has been updated.',
-            'success'
-          );
     } catch (error) {
       console.error('Failed to save availability:', error);
-      showToast(
-        'Your Availability schedule saving failed. Try again.',
-        'error'
-      );
       // Optionally handle the error, e.g., revert the update or notify the user
     } finally {
       setIsSaving(false);

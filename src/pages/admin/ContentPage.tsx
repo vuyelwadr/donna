@@ -2,11 +2,8 @@ import React, { useState } from 'react';
 import { Save } from 'lucide-react';
 import ContentEditor from '../../components/admin/content/ContentEditor';
 import { useContent } from '../../context/ContentContext';
-import Toast from '../../components/shared/Toast';
-import { useToast } from '../../context/ToastContext';
 
 export default function ContentPage() {
-  const { message, type, isVisible, hideToast } = useToast();
 
   const { sections, updateContent } = useContent();
   const [pendingChanges, setPendingChanges] = useState<Record<string, any>>({});
@@ -62,12 +59,6 @@ export default function ContentPage() {
           </div>
         ))}
       </div>
-      <Toast
-        message={message}
-        type={type}
-        isVisible={isVisible}
-        onClose={hideToast}
-      />
     </div>
   );
 }

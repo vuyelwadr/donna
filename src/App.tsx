@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ContentProvider } from './context/ContentContext';
-import { ToastProvider } from './context/ToastContext';
 import MainLayout from './layouts/MainLayout';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/admin/LoginPage';
@@ -17,7 +16,6 @@ const queryClient = new QueryClient();
 
 export default function App() {
   return (
-    <ToastProvider>
     <QueryClientProvider client={queryClient}>
       <ContentProvider>
         <BrowserRouter>
@@ -44,6 +42,5 @@ export default function App() {
         </BrowserRouter>
       </ContentProvider>
     </QueryClientProvider>
-    </ToastProvider>
   );
 }

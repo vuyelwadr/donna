@@ -4,8 +4,10 @@ import { useAuth } from '../../hooks/useAuth';
 import LoginForm from '../../components/admin/auth/LoginForm';
 import Logo from '../../components/Logo';
 
+
 export default function LoginPage() {
   const { isAuthenticated } = useAuth();
+  
 
   if (isAuthenticated) {
     return <Navigate to="/admin" replace />;

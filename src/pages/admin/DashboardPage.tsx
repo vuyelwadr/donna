@@ -4,12 +4,8 @@ import { Calendar } from 'lucide-react';
 import AppointmentList from '../../components/admin/dashboard/AppointmentList';
 import AppointmentToggle from '../../components/admin/dashboard/AppointmentToggle';
 import { getAppointments } from '../../services/appointmentService';
-import Toast from '../../components/shared/Toast';
-import { useToast } from '../../context/ToastContext';
 
 export default function DashboardPage() {
-  const { message, type, isVisible, hideToast } = useToast();
-
   const [showPastAppointments, setShowPastAppointments] = useState(false);
 
   const { data: appointments = [], isLoading, error } = useQuery({
@@ -58,12 +54,6 @@ export default function DashboardPage() {
       ) : (
         <AppointmentList appointments={appointments} />
       )}
-      <Toast
-        message={message}
-        type={type}
-        isVisible={isVisible}
-        onClose={hideToast}
-      />
     </div>
   );
 }

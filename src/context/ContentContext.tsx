@@ -2,7 +2,6 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { JSONContent } from '@tiptap/react';
 import { ContentSection } from '../types/content';
 import { saveContent, loadContent } from '../services/contentService';
-import { useToast } from './ToastContext';
 
 
 interface ContentContextType {
@@ -14,7 +13,6 @@ const ContentContext = createContext<ContentContextType | undefined>(undefined);
 
 export function ContentProvider({ children }: { children: React.ReactNode }) {
   const [sections, setSections] = useState<ContentSection[]>([]); // Initialize with an empty array
-  const { showToast } = useToast();
 
   useEffect(() => {
     const fetchContent = async () => {
@@ -39,17 +37,9 @@ export function ContentProvider({ children }: { children: React.ReactNode }) {
       );
       saveContent(updatedSections)
         .then(() => {
-          showToast(
-            'Content updated successfuly.',
-            'success'
-          );
         })
         .catch((error) => {
           console.error('Failed to save content:', error);
-          showToast(
-            'Content update unsuccessful. Please try again.',
-            'error'
-          );
         });
       return updatedSections;
     });
