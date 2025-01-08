@@ -62,3 +62,39 @@ input:invalid, select:invalid, textarea:invalid {
 input:valid, select:valid, textarea:valid {
   border-color: #10b981;
 }
+
+/* date */
+.react-datepicker__day--unavailable {
+  pointer-events: none;
+  opacity: 0.5;
+  filter: blur(1px);
+  color: gray;
+}
+.custom-date-picker-width {
+  width: 100%;
+}
+
+/* time  */
+.react-datepicker__input-container {
+  position: relative;
+}
+
+.react-datepicker__input-container::after {
+  content: '';
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background: url('path-to-calendar-icon.svg') no-repeat center center;
+  pointer-events: none;
+}
+
+
+.blurred-date {
+  pointer-events: none;
+  opacity: 0.5;
+  filter: blur(1px);
+  color: gray;
+}

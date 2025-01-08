@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
-import { DayAvailability } from '../../types/availability';
-import { isDateAvailable } from '../../utils/availability';
-import { format, parse } from 'date-fns';
+import React from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { format, parseISO } from 'date-fns';
+
+interface DayAvailability {
+  dayOfWeek: number; // 0 (Sunday) to 6 (Saturday)
+  enabled: boolean;
+}
 
 interface Props {
   value: string;
@@ -11,14 +16,28 @@ interface Props {
   error?: string;
 }
 
-export default function DateSelect({ value, onChange, onBlur, schedule, error }: Props) {
-  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const date = parse(e.target.value, 'yyyy-MM-dd', new Date());
-    
-    // Only allow changes if the selected date is available
-    if (isDateAvailable(date, schedule)) {
-      onChange(e);
+const DateSelect: React.FC<Props> = ({ value, onChange, onBlur, schedule, error }) => {
+  const handleDateChange = (date: Date | null) => {
+    if (date) {
+      const formattedDate = format(date, 'yyyy-MM-dd');
+      const fakeEvent = {
+        target: {
+          name: 'date',
+          value: formattedDate,
+        },
+      } as React.ChangeEvent<HTMLInputElement>;
+      onChange(fakeEvent);
     }
+  };
+
+  const isDateAvailable = (date: Date) => {
+    const dayOfWeek = date.getDay();
+    const availability = schedule.find((day) => day.dayOfWeek === dayOfWeek);
+    return availability ? availability.enabled : false;
+  };
+
+  const dayClassName = (date: Date) => {
+    return isDateAvailable(date) ? '' : 'react-datepicker__day--unavailable';
   };
 
   return (
@@ -26,34 +45,19 @@ export default function DateSelect({ value, onChange, onBlur, schedule, error }:
       <label className="block text-brand-dark mb-2" htmlFor="date">
         Preferred Date<span className="text-brand-primary ml-1">*</span>
       </label>
-      <div className="relative">
-        <input
-          type="date"
-          id="date"
-          name="date"
-          required
-          className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-brand-primary focus:ring-1 focus:ring-brand-primary outline-none"
-          value={value}
-          onChange={handleDateChange}
-          onBlur={onBlur}
-        />
-      </div>
+      <DatePicker
+        selected={value ? parseISO(value) : null}
+        onChange={handleDateChange}
+        onBlur={onBlur}
+        dayClassName={dayClassName}
+        dateFormat="yyyy-MM-dd"
+        className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-brand-primary focus:ring-1 focus:ring-brand-primary outline-none"
+        wrapperClassName="custom-date-picker-width"
+      />
+
       {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
-      <AvailableDays schedule={schedule} />
     </div>
   );
-}
+};
 
-function AvailableDays({ schedule }: { schedule: DayAvailability[] }) {
-  const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  const availableDays = schedule
-    .filter(day => day.enabled)
-    .map(day => DAYS[day.dayOfWeek])
-    .join(', ');
-
-  return (
-    <p className="mt-2 text-sm text-gray-600">
-      Available days: {availableDays}
-    </p>
-  );
-}
+export default DateSelect;

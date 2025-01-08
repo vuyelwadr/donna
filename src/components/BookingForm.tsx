@@ -9,8 +9,9 @@ import TimeSelect from './booking/TimeSelect';
 import { useBooking } from '../context/BookingContext';
 import { useFormValidation } from './booking/useFormValidation';
 import { FormData } from '../types/booking';
-import availabilityData from '../data/availability.json';
-import appointmentData from '../data/appointments.json';
+import { loadAvailability } from '../services/availabilityService';
+import { getAppointments } from '../services/appointmentService';
+import type { DayAvailability } from '../types/availability';
 
 const initialFormData: FormData = {
   name: '',
@@ -25,13 +26,41 @@ const initialFormData: FormData = {
 export default function BookingForm() {
   const { selectedService } = useBooking();
   const [formData, setFormData] = useState<FormData>(initialFormData);
-  const { errors, setErrors, touchedFields, setTouchedFields, validateField, validateForm } = useFormValidation();
+  const { errors, setErrors, touchedFields, setTouchedFields, validateField } = useFormValidation();
+  const [availability, setAvailability] = useState<DayAvailability[]>([]);
+  const [appointments, setAppointments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (selectedService) {
       setFormData(prev => ({ ...prev, service: selectedService }));
     }
   }, [selectedService]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const availabilityData = await loadAvailability();
+        setAvailability(availabilityData.schedule);
+      } catch (error) {
+        console.error('Error fetching availability:', error);
+        setError('Failed to fetch availability data.');
+      }
+
+      try {
+        const appointmentData = await getAppointments();
+        setAppointments(appointmentData);
+      } catch (error) {
+        console.error('Error fetching appointments:', error);
+        setError('Failed to fetch appointment data.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -61,6 +90,11 @@ export default function BookingForm() {
           <h2 className="font-cormorant text-4xl text-center text-white mb-8">Book Your Session</h2>
           
           <form className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg p-8">
+            {error && (
+              <div className="bg-red-100 text-red-700 p-4 mb-6 rounded">
+                {error}
+              </div>
+            )}
             <div className="grid md:grid-cols-2 gap-6">
               <FormField
                 label="Name"
@@ -102,7 +136,7 @@ export default function BookingForm() {
                 value={formData.date}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                schedule={availabilityData.schedule}
+                schedule={availability}
                 error={touchedFields.has('date') ? errors.date : undefined}
               />
               
@@ -111,8 +145,8 @@ export default function BookingForm() {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 date={formData.date}
-                schedule={availabilityData.schedule}
-                appointments={appointmentData.appointments}
+                schedule={availability}
+                appointments={appointments}
                 error={touchedFields.has('time') ? errors.time : undefined}
               />
             </div>
