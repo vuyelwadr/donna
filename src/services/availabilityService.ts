@@ -1,7 +1,6 @@
 import { AvailabilityData } from '../types/availability';
 import { API_URL } from '../utils/apiUrl';
 
-
 export async function loadAvailability(): Promise<AvailabilityData> {
   try {
     const response = await fetch(`${API_URL}/availability`, {
@@ -29,19 +28,27 @@ export async function loadAvailability(): Promise<AvailabilityData> {
 }
 
 export async function saveAvailability(data: AvailabilityData): Promise<void> {
-  const response = await fetch(`${API_URL}/availability`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  });
+  try {
+    const response = await fetch(`${API_URL}/availability`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
 
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.error || 'Failed to save availability');
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to save availability');
+    }
+
+    window.dispatchEvent(new Event('availability-updated'));
+  } catch (error) {
+    console.error('Failed to save availability:', error);
+    throw new Error(
+      error instanceof Error
+        ? error.message
+        : 'An unexpected error occurred while saving availability.'
+    );
   }
-
-
-  window.dispatchEvent(new Event('availability-updated'));
 }

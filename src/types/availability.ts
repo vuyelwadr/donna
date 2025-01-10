@@ -9,6 +9,16 @@ export interface DayAvailability {
   timeSlots: TimeSlot[];
 }
 
+export interface WeekAvailability {
+  weekStart: string; // Format "YYYY-MM-DD" (start of the week)
+  days: DayAvailability[];
+}
+
+export interface MonthAvailability {
+  month: string; // Format "YYYY-MM"
+  weeks: WeekAvailability[];
+}
+
 export interface AvailabilityData {
-  schedule: DayAvailability[];
+  schedule: MonthAvailability[];
 }

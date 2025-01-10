@@ -1,74 +1,7 @@
 {
   "schedule": [
     {
-      "dayOfWeek": 0,
-      "enabled": true,
-      "timeSlots": [
-        {
-          "start": "08:00",
-          "end": "20:00"
-        }
-      ]
-    },
-    {
-      "dayOfWeek": 1,
-      "enabled": true,
-      "timeSlots": [
-        {
-          "start": "13:00",
-          "end": "17:00"
-        }
-      ]
-    },
-    {
-      "dayOfWeek": 2,
-      "enabled": true,
-      "timeSlots": [
-        {
-          "start": "08:00",
-          "end": "20:00"
-        }
-      ]
-    },
-    {
-      "dayOfWeek": 3,
-      "enabled": true,
-      "timeSlots": [
-        {
-          "start": "08:00",
-          "end": "20:00"
-        }
-      ]
-    },
-    {
-      "dayOfWeek": 4,
-      "enabled": true,
-      "timeSlots": [
-        {
-          "start": "08:00",
-          "end": "20:00"
-        }
-      ]
-    },
-    {
-      "dayOfWeek": 5,
-      "enabled": true,
-      "timeSlots": [
-        {
-          "start": "08:00",
-          "end": "20:00"
-        }
-      ]
-    },
-    {
-      "dayOfWeek": 6,
-      "enabled": true,
-      "timeSlots": [
-        {
-          "start": "08:00",
-          "end": "16:00"
-        }
-      ]
+
     }
   ]
 }

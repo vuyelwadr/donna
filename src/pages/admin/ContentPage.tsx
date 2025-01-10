@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { Save } from 'lucide-react';
 import ContentEditor from '../../components/admin/content/ContentEditor';
 import { useContent } from '../../context/ContentContext';
+import { useToast } from '../../context/ToastContext';
 
 export default function ContentPage() {
-
   const { sections, updateContent } = useContent();
   const [pendingChanges, setPendingChanges] = useState<Record<string, any>>({});
   const [isSaving, setIsSaving] = useState(false);
+  const { showToast } = useToast();
 
   const handleContentChange = (sectionId: string, newContent: any) => {
     setPendingChanges(prev => ({
@@ -16,13 +17,20 @@ export default function ContentPage() {
     }));
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     setIsSaving(true);
-    Object.entries(pendingChanges).forEach(([sectionId, content]) => {
-      updateContent(sectionId, content);
-    });
-    setPendingChanges({});
-    setIsSaving(false);
+    try {
+      Object.entries(pendingChanges).forEach(([sectionId, content]) => {
+        updateContent(sectionId, content);
+      });
+      setPendingChanges({});
+      showToast('Content saved successfully!', 'success');
+    } catch (error) {
+      console.error('Failed to save content:', error);
+      showToast('Failed to save content', 'error');
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const hasChanges = Object.keys(pendingChanges).length > 0;
