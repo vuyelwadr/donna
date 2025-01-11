@@ -62,10 +62,12 @@ export default function DaySchedule({ day, onUpdate, onApplyToAll, weekStart }: 
   };
 
   return (
-    <div className="p-4 border rounded-lg bg-white">
+    <div className={`p-4 border rounded-lg bg-white ${!day.enabled ? 'opacity-60' : ''}`}>
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-medium">
-          {DAYS[day.dayOfWeek]}
+        <h3 className={`text-lg font-medium ${!day.enabled ? 'text-gray-500' : ''}`}>
+          <span className={`${isPastDay ? 'line-through' : ''}`}>
+            {DAYS[day.dayOfWeek]}
+          </span>
           <span className="ml-2 text-sm text-gray-500">
             {format(dayDate, 'dd MMMM yyyy')}
           </span>
