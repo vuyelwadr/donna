@@ -16,19 +16,23 @@ import {
 interface Props {
   month: MonthAvailability;
   onUpdate: (updated: MonthAvailability) => void;
+  expandedAll: boolean;
 }
 
-export default function MonthSchedule({ month, onUpdate }: Props) {
+export default function MonthSchedule({ month, onUpdate, expandedAll }: Props) {
   const [expandedWeeks, setExpandedWeeks] = useState<string[]>([]);
 
   useEffect(() => {
-    // Expand the current week by default
-    const today = new Date();
-    const currentWeekStart = format(startOfWeek(today, { weekStartsOn: 0 }), 'yyyy-MM-dd');
-    if (isSameMonth(today, parseISO(month.month + '-01'))) {
-      setExpandedWeeks([currentWeekStart]);
+    // Expand all weeks with available days by default
+    if (!expandedAll) {
+      const weeksToExpand = month.weeks
+        .filter(week => week.days.some(day => day.enabled))
+        .map(week => week.weekStart);
+      setExpandedWeeks(weeksToExpand);
+    } else {
+      setExpandedWeeks([]);
     }
-  }, [month]);
+  }, [month, expandedAll]);
 
   const handleWeekUpdate = (weekIndex: number, updatedWeek: any) => {
     const newWeeks = month.weeks.map((week, i) => (i === weekIndex ? updatedWeek : week));
@@ -134,7 +138,7 @@ export default function MonthSchedule({ month, onUpdate }: Props) {
           week={week}
           onUpdate={(updated) => handleWeekUpdate(index, updated)}
           onApplyToAll={handleApplyToAll}
-          isExpanded={expandedWeeks.includes(week.weekStart)}
+          isExpanded={expandedAll ? true : expandedWeeks.includes(week.weekStart)}
           onToggleExpand={() => handleToggleWeek(week.weekStart)}
         />
       ))}

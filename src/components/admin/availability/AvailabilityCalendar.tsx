@@ -11,6 +11,7 @@ export default function AvailabilityCalendar() {
   const [isSaving, setIsSaving] = useState(false);
   const [currentMonth, setCurrentMonth] = useState(startOfMonth(new Date()));
   const { showToast } = useToast();
+  const [expandedAll, setExpandedAll] = useState(false);
 
   useEffect(() => {
     const fetchAvailability = async () => {
@@ -65,18 +66,30 @@ export default function AvailabilityCalendar() {
     }
   };
 
+  const handleToggleAll = () => {
+    setExpandedAll(prev => !prev);
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-semibold text-gray-900">Availability Schedule</h2>
-        <button
-          onClick={handleSave}
-          disabled={isSaving}
-          className="flex items-center gap-2 px-4 py-2 bg-brand-primary text-white rounded-md hover:bg-brand-primary/90 disabled:opacity-50"
-        >
-          <Save className="w-4 h-4" />
-          {isSaving ? 'Saving...' : 'Save Changes'}
-        </button>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={handleToggleAll}
+            className="text-sm text-gray-600 hover:text-brand-primary/80"
+          >
+            {expandedAll ? 'Collapse All' : 'Expand All'}
+          </button>
+          <button
+            onClick={handleSave}
+            disabled={isSaving}
+            className="flex items-center gap-2 px-4 py-2 bg-brand-primary text-white rounded-md hover:bg-brand-primary/90 disabled:opacity-50"
+          >
+            <Save className="w-4 h-4" />
+            {isSaving ? 'Saving...' : 'Save Changes'}
+          </button>
+        </div>
       </div>
 
       <div className="flex justify-between items-center mb-4">
@@ -89,6 +102,7 @@ export default function AvailabilityCalendar() {
         <MonthSchedule
           month={currentMonthData}
           onUpdate={(updated) => handleMonthUpdate(schedule.findIndex(month => month.month === currentMonthStr), updated)}
+          expandedAll={expandedAll}
         />
       ) : (
         <div className="text-center">
