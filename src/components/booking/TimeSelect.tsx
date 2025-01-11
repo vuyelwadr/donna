@@ -1,8 +1,7 @@
 import React from 'react';
 import { Clock } from 'lucide-react';
-import { DayAvailability } from '../../types/availability';
-import { FormData } from '../../types/booking';
-import { getAvailableTimeSlots } from '../../utils/availability';
+import { MonthAvailability, TimeSlot } from '../../types/availability';
+import { parseISO, format, isSameDay, addHours, isAfter, isBefore, startOfWeek } from 'date-fns';
 import { generateHourlySlots } from '../../utils/timeSlots';
 
 interface Props {
@@ -10,15 +9,14 @@ interface Props {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
   date: string;
-  schedule: DayAvailability[];
-  appointments: FormData[];
+  schedule: MonthAvailability[];
+  appointments: any[];
   error?: string;
 }
 
 export default function TimeSelect({ value, onChange, onBlur, date, schedule, appointments, error }: Props) {
-  const timeSlots = date 
-    ? generateHourlySlots(getAvailableTimeSlots(schedule, date), appointments, date)
-    : [];
+  const selectedDate = date ? parseISO(date) : null;
+  const availableTimeSlots = selectedDate ? getAvailableTimeSlots(schedule, selectedDate, appointments) : [];
 
   const handleTimeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     // Create a fake input event to maintain compatibility with the form
@@ -46,10 +44,10 @@ export default function TimeSelect({ value, onChange, onBlur, date, schedule, ap
           value={value}
           onChange={handleTimeChange}
           onBlur={onBlur}
-          disabled={!date || timeSlots.length === 0}
+          disabled={!date || availableTimeSlots.length === 0}
         >
           <option value="">Select a time</option>
-          {timeSlots.map((slot) => (
+          {availableTimeSlots.map((slot) => (
             <option key={slot.start} value={slot.start}>
               {slot.display}
             </option>
@@ -62,11 +60,36 @@ export default function TimeSelect({ value, onChange, onBlur, date, schedule, ap
         />
       </div>
       {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
-      {date && timeSlots.length === 0 && (
+      {date && availableTimeSlots.length === 0 && (
         <p className="mt-2 text-sm text-red-500">
           No available time slots for the selected date
         </p>
       )}
     </div>
   );
+}
+
+function getAvailableTimeSlots(schedule: MonthAvailability[], date: Date, appointments: any[]): any[] {
+  const formattedDate = format(date, 'yyyy-MM-dd');
+  const monthAvailability = schedule.find((month) => month.month === format(date, 'yyyy-MM'));
+
+  if (!monthAvailability) {
+    return [];
+  }
+
+  const dayOfWeek = date.getDay();
+  const weekStart = format(startOfWeek(date, { weekStartsOn: 0 }), 'yyyy-MM-dd');
+  const weekAvailability = monthAvailability.weeks.find((week) => week.weekStart === weekStart);
+
+  if (!weekAvailability) {
+    return [];
+  }
+
+  const dayAvailability = weekAvailability.days.find((day) => day.dayOfWeek === dayOfWeek);
+
+  if (!dayAvailability || !dayAvailability.enabled) {
+    return [];
+  }
+
+  return generateHourlySlots(dayAvailability.timeSlots, appointments, formattedDate);
 }
